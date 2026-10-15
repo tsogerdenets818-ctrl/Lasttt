@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Домогт Толь</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: radial-gradient(circle at center, #1a150b 0%, #050505 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Georgia', serif;
+            overflow: hidden;
+        }
+
+        /* Сүрлэг товчлуур */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            animation: floatBtn 3s ease-in-out infinite;
+        }
+
+        .magic-btn {
+            background: linear-gradient(145deg, #1f1a11, #0a0805);
+            color: #ffd700;
+            font-size: 24px;
+            font-family: 'Georgia', serif;
+            padding: 22px 45px;
+            border-radius: 50px;
+            border: 2px solid #d4af37;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.4), 
+                        inset 0 0 15px rgba(212, 175, 55, 0.3);
+            cursor: pointer;
+            outline: none;
+            text-shadow: 0 0 12px rgba(255, 215, 0, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        .magic-btn:hover {
+            box-shadow: 0 0 45px rgba(212, 175, 55, 0.7), 
+                        inset 0 0 20px rgba(255, 215, 0, 0.5);
+            transform: scale(1.05);
+        }
+
+        /* Домогт толь */
+        .mirror-wrapper {
+            display: none;
+            position: relative;
+            width: 340px;
+            height: 500px;
+            background: linear-gradient(180deg, #2b2313 0%, #0d0a06 100%);
+            border-radius: 170px 170px 25px 25px;
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.5), 
+                        0 0 100px rgba(0, 0, 0, 0.9),
+                        inset 0 0 25px rgba(255, 215, 0, 0.3);
+            padding: 20px;
+            justify-content: center;
+            align-items: center;
+            animation: epicAppear 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .mirror-glass {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #161a1d 0%, #020304 100%);
+            border-radius: 155px 155px 15px 15px;
+            border: 2px solid rgba(212, 175, 55, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 35px;
+            text-align: center;
+            position: relative;
+            box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.9);
+        }
+
+        /* Текстийн ерөнхий хэв маяг */
+        .mirror-text {
+            color: #f3e5ab;
+            font-size: 21px;
+            line-height: 1.8;
+            text-shadow: 0 0 15px rgba(243, 229, 171, 0.6);
+            font-weight: 500;
+        }
+
+        /* Мөр тус бүрийн нууцлал ба гарч ирэх эффект */
+        .line {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            margin-bottom: 8px;
+        }
+
+        .line.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .highlight {
+            display: block;
+            margin-top: 15px;
+            font-size: 22px;
+            color: #ffffff;
+            font-weight: bold;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+
+        .heart {
+            color: #ff3333;
+            font-size: 26px;
+            display: inline-block;
+            animation: pulse 1.2s infinite;
+            filter: drop-shadow(0 0 10px rgba(255, 51, 51, 0.8));
+        }
+
+        @keyframes floatBtn {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.25); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes epicAppear {
+            0% { opacity: 0; transform: scale(0.7) rotateX(20deg); }
+            100% { opacity: 1; transform: scale(1) rotateX(0deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Сүрлэг товчлуур -->
+    <div class="btn-container" id="buttonContainer">
+        <button class="magic-btn" onclick="openMirror()">Толь минь, толь минь...</button>
+    </div>
+
+    <!-- Домогт толь -->
+    <div class="mirror-wrapper" id="mirrorWrapper">
+        <div class="mirror-glass">
+            <div class="mirror-text">
+                <div class="line" id="l1">Толь минь толь минь</div>
+                <div class="line" id="l2">энэ дэлхийн хамгийн</div>
+                <div class="line" id="l3">хөөрхөн хүн бол...</div>
+                <div class="line highlight" id="l4">Мэдээж Цог-Эрдэнэ байлгүй яахав ац! <span class="heart">❤️</span></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openMirror() {
+            // Товчлуурыг нууж, толийг гаргаж ирэх
+            document.getElementById('buttonContainer').style.display = 'none';
+            document.getElementById('mirrorWrapper').style.display = 'flex';
+
+            // Мөрүүдийг дарааллаар нь нэг нэгээр нь гарч ирэх хугацаа өгөх
+            setTimeout(() => { document.getElementById('l1').classList.add('visible'); }, 400);
+            setTimeout(() => { document.getElementById('l2').classList.add('visible'); }, 1400);
+            setTimeout(() => { document.getElementById('l3').classList.add('visible'); }, 2400);
+            setTimeout(() => { document.getElementById('l4').classList.add('visible'); }, 3500);
+        }
+    </script>
+
+</body>
+</html>
